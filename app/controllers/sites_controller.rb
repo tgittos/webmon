@@ -14,7 +14,8 @@ class SitesController < ApplicationController
       flash[:notice] = "Site has been created."
       redirect_to @site
     else
-      # nothing yet
+      flash.now[:alert] = "Site has not been created."
+      render "new"
     end
   end
 

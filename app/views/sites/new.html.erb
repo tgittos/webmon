@@ -1,4 +1,19 @@
 <h1>New Site</h1>
+
+<% if @site.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@site.errors.count, "error") %>
+      prevented this site from being saved:
+    </h2>
+    <ul>
+      <% @site.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= simple_form_for(@site) do |f| %>
 
   <%= f.input :name %>
