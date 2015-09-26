@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webmon</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <script src="https://spiceworks.github.io/spiceworks-js-sdk/dist/spiceworks-sdk.js" type="text/javascript"></script>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+   <script type="text/javascript">
+   $(document).ready(function(){
+       // this is demo scripts for testing the spiceworks app
+     var card = new SW.Card();
+     var environment = card.services('environment');
+     environment.request('users').then(function(data){
+       $.each(data.users, function(index, user){
+         console.log('user:', user);
+       });
+     });
+   });
+  </script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% flash.each do |key, message| %>
+  <div class="<%= key %>"><%= message %></div>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
