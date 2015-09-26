@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
 
   def index
+    @sites = Site.active
   end
 
   def new

@@ -6,3 +6,10 @@
       class: "btn btn-success" %></li>
   </ul>
 </header>
+
+<div class="sites">
+  <% @sites.each do |site| %>
+    <h2><%= link_to site.name, site %></h2>
+    <p><%= site.url %></p>
+  <% end %>
+</div>
