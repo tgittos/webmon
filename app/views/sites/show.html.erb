@@ -4,6 +4,9 @@
   <ul class="actions">
     <li><%= link_to "Edit Site", edit_site_path(@site),
       class: "btn edit" %></li>
+    <li><%= link_to "Delete Site", site_path(@site),
+      method: :delete,
+      class: "btn delete" %></li>
   </ul>
 </header>
 
