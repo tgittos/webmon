@@ -11,3 +11,18 @@
 </header>
 
 <p><%= @site.url %></p>
+
+<% if not @site.site_healths.empty? %>
+<div id="site_performance">
+  <ul>
+    <li>
+      <strong>Last HTTP status:</strong>
+      <%= @site.site_healths.most_recent.http_response %>
+    </li>
+    <li>
+      <strong>Last response time:</strong>
+      <%= @site.site_healths.most_recent.response_time %>ms
+    </li>
+  </ul>
+</div>
+<% end %>
