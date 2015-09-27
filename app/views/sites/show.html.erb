@@ -1,2 +1,10 @@
-<h1><%= @site.name %></h1>
+<header>
+  <h1><%= @site.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Site", edit_site_path(@site),
+      class: "btn edit" %></li>
+  </ul>
+</header>
+
 <p><%= @site.url %></p>
