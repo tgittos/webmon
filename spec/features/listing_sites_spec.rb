@@ -23,6 +23,8 @@ RSpec.feature "Users can list sites" do
   end
 
   scenario "with the site's current response time" do
+    SiteHealth.destroy_all # shouldn't have to do this?
+
     FactoryGirl.create(:site_health, site: @site, response_time: 200)
 
     visit "/"

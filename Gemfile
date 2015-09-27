@@ -51,6 +51,8 @@ end
 group :test do
   gem 'capybara', '~> 2.4'
   gem 'factory_girl_rails', '~> 4.5'
+  gem 'fakeweb', '~> 1.3.0'
+  gem 'timecop', '~> 0.8.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -62,4 +64,4 @@ gem 'font-awesome-rails', '~> 4.3'
 gem 'simple_form', '~> 3.1.0'
 
 # Scheduling
-gem 'rufus-scheduler'
+gem 'rufus-scheduler', '~> 3.1.5'
