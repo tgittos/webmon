@@ -12,6 +12,9 @@
 
 <p><%= @site.url %></p>
 
+<header>
+  <h2>Site Performance</h2>
+</header>
 <% if not @site.site_healths.empty? %>
 <div id="site_performance">
   <ul>
@@ -25,4 +28,29 @@
     </li>
   </ul>
 </div>
+<% else %>
+  <p>No performance tests run yet!</p>
+<% end %>
+
+<header>
+  <h2>Content Tests</h2>
+
+  <ul class="actions">
+    <li>
+      <%= link_to "New Test", new_site_content_test_path(@site),
+        class: "new" %>
+    </li>
+  </ul>
+</header>
+
+<% if not @site.content_tests.empty? %>
+<div id="content_tests">
+  <ul>
+    <% @site.content_tests.each do |test| %>
+      <li><%= test.comparison %> "<%= test.content %>": result goes here</li>
+    <% end %>
+  </ul>
+</div>
+<% else %>
+  <p>No content tests set up.</p>
 <% end %>

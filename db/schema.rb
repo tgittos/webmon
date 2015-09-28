@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927044026) do
+ActiveRecord::Schema.define(version: 20150927212736) do
+
+  create_table "content_tests", force: :cascade do |t|
+    t.string   "comparison"
+    t.string   "content"
+    t.integer  "site_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "content_tests", ["site_id"], name: "index_content_tests_on_site_id"
 
   create_table "site_healths", force: :cascade do |t|
     t.integer  "site_id"
