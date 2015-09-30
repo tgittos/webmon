@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927212736) do
+ActiveRecord::Schema.define(version: 20150928023920) do
 
   create_table "content_tests", force: :cascade do |t|
     t.string   "comparison"
@@ -40,5 +40,14 @@ ActiveRecord::Schema.define(version: 20150927212736) do
     t.datetime "updated_at",                null: false
     t.boolean  "active",     default: true
   end
+
+  create_table "test_statuses", force: :cascade do |t|
+    t.boolean  "result"
+    t.integer  "content_test_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "test_statuses", ["content_test_id"], name: "index_test_statuses_on_content_test_id"
 
 end

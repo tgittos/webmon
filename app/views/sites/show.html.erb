@@ -47,7 +47,7 @@
 <div id="content_tests">
   <ul>
     <% @site.content_tests.each do |test| %>
-      <li><%= test.comparison %> "<%= test.content %>": result goes here</li>
+      <li><%= test.comparison %> "<%= test.content %>": <%= test.current_status %></li>
     <% end %>
   </ul>
 </div>

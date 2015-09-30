@@ -15,12 +15,15 @@ class Site < ActiveRecord::Base
   def check!
     start_time = Time.now
     response = http_get(url)
-    body = response.body
     finish_time = Time.now
     site_health = site_healths.create({
       http_response: response.code.to_i,
       response_time: ((finish_time.to_f - start_time.to_f) * 1000.0).to_i
     })
+  end
+
+  def fetch
+    @content ||= http_get(url).body
   end
 
   private
