@@ -6,7 +6,7 @@ RSpec.feature "Users can view past content tests" do
     @site = FactoryGirl.create(:site, name: "Google Status Page")
     10.times do |n|
       result = FactoryGirl.create(:content_test, site: @site, content: "Foobar #{n}")
-      result.test_statuses << FactoryGirl.create(:test_status, content_test: result)
+      result.test_statuses << FactoryGirl.create(:test_status, content_test: result, result: true)
     end
 
     visit site_path(@site)
@@ -17,7 +17,7 @@ RSpec.feature "Users can view past content tests" do
   end
 
   scenario "with each test's last status" do
-    expect(find('#content_tests')).to have_content('Content not found')
+    expect(find('#content_tests')).to have_content('OK')
   end
 
 end
