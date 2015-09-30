@@ -4,8 +4,14 @@
   </header>
 
   <header>
-    <h2><%= @test.comparison %> <%= @test.content %></h2>
+    <h2><%= @test.comparison %> "<%= @test.content %>"</h2>
   </header>
 
-  History of tests goes here
+  <div id="results">
+    <ul>
+    <% @test.test_statuses.each do |result|%>
+      <li><%= result.result ? "OK" : "Content not found" %> - <span title="<%= result.created_at %>"><%= time_ago_in_words(result.created_at) %> ago</span></li>
+    <% end %>
+    </ul>
+  </div>
 </div>
