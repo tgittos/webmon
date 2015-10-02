@@ -41,9 +41,12 @@ class Site < ActiveRecord::Base
   def http_get(http_url)
     uri = URI.parse(http_url)
     request = Net::HTTP::Get.new(uri.to_s)
-    Net::HTTP.start(uri.host, uri.port) {|http|
-      http.request(request)
-    }
+    http = Net::HTTP.new(uri.host, uri.port)
+    if uri.scheme == "https"
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE # read into this
+    end
+    http.get(uri.request_uri)
   end
 
 end
