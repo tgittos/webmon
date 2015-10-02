@@ -17,7 +17,13 @@ RSpec.feature "Users can view past content tests" do
   end
 
   scenario "with each test's last status" do
-    expect(find('#content_tests')).to have_content('OK')
+    expect(find('#content_tests')).to have_css('li.ok')
+  end
+
+  scenario "and click on the test to visit it" do
+    content_test = ContentTest.last
+    click_link content_test.to_s
+    expect(page.current_url).to eq site_content_test_url(@site, content_test)
   end
 
 end

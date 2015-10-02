@@ -1,16 +1,21 @@
 <div id="content_test">
   <header>
-    <h1><%= @site.name %></h1>
+    <h1><%= link_to @site.name, site_path(@site) %></h1>
   </header>
 
   <header>
-    <h2><%= @test.comparison %> "<%= @test.content %>"</h2>
+    <h4><%= @test.comparison %> "<%= @test.content %>"</h4>
+    <ul class="actions">
+      <li><%= link_to "Delete Content Test", site_content_test_path(@site, @test),
+        method: :delete,
+        class: "btn delete" %></li>
+    </ul>
   </header>
 
-  <div id="results">
+  <div id="results" class="status">
     <ul>
-    <% @test.test_statuses.each do |result|%>
-      <li><%= result.result ? "OK" : "Content not found" %> - <span title="<%= result.created_at %>"><%= time_ago_in_words(result.created_at) %> ago</span></li>
+    <% @test.test_statuses.newest_first.limit(10).each do |result|%>
+      <li class="<%= result.css_class %>"><span title="<%= result.created_at %>"><%= time_ago_in_words(result.created_at) %> ago</span></li>
     <% end %>
     </ul>
   </div>

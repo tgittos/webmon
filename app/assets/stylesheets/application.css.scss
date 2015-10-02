@@ -2,7 +2,8 @@
 @import 'bootstrap';
 @import 'font-awesome';
 @import 'responsive';
-
+@import 'sites';
+@import 'content_tests';
 /*
 @import 'projects';
 @import 'tickets';
@@ -71,4 +72,25 @@ form {
 
 body {
   padding-top: 70px;
+}
+
+h1.ok, h2.ok, h3.ok, h4.ok, h5.ok, h6.ok,
+h1.warning, h2.warning, h3.warning, h4.warning, h5.warning, h6.warning,
+h1.error, h2.error, h3.error, h4.error, h5.error, h6.error {
+  background-repeat: no-repeat;
+  padding-left: 45px;
+  background-size: 30px;
+  background-position-y: 2px;
+}
+
+h1.ok, h2.ok, h3.ok, h4.ok, h5.ok, h6.ok {
+  background-image: image-url('status-ok.jpg');
+}
+
+h1.warning, h2.warning, h3.warning, h4.warning, h5.warning, h6.warning {
+  background-image: image-url('status-warning.jpg');
+}
+
+h1.error, h2.error, h3.error, h4.error, h5.error, h6.error {
+  background-image: image-url('status-error.jpg');
 }

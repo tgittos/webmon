@@ -16,13 +16,13 @@
   <h2>Site Performance</h2>
 </header>
 <% if not @site.site_healths.empty? %>
-<div id="site_performance">
+<div id="site_performance" class="status">
   <ul>
-    <li>
+    <li class="<%= @site.latest_status %>">
       <strong>Last HTTP status:</strong>
       <%= @site.site_healths.most_recent.http_response %>
     </li>
-    <li>
+    <li class="response-time">
       <strong>Last response time:</strong>
       <%= @site.site_healths.most_recent.response_time %>ms
     </li>
@@ -44,10 +44,10 @@
 </header>
 
 <% if not @site.content_tests.empty? %>
-<div id="content_tests">
+<div id="content_tests" class="status">
   <ul>
-    <% @site.content_tests.each do |test| %>
-      <li><%= test.comparison %> "<%= test.content %>": <%= test.current_status %></li>
+    <% @site.content_tests.active.each do |test| %>
+      <li class="<%= test.latest_status %>"><%= link_to test.to_s, site_content_test_path(@site, test) %></li>
     <% end %>
   </ul>
 </div>

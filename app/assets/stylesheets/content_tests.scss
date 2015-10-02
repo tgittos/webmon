@@ -1,3 +1,30 @@
 // Place all the styles related to the ContentTests controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.status ul {
+  @extend .list-unstyled;
+}
+
+.status li.ok, .status li.warning, .status li.error {
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  background-size: 15px;
+  background-position-y: 2px;
+}
+
+.status li.ok {
+  background-image: image-url('status-ok.jpg');
+}
+
+.status li.warning {
+  background-image: image-url('status-warning.jpg');
+}
+
+.status li.error {
+  background-image: image-url('status-error.jpg');
+}
+
+li.response-time {
+  margin-left: 25px;
+}

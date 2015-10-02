@@ -26,6 +26,16 @@ class Site < ActiveRecord::Base
     @content ||= http_get(url).body
   end
 
+  def latest_status
+    main_test_passes = site_healths.most_recent.http_response == 200 
+    content_test_failing = content_tests.collect(&:current_status).include?("Test failed")
+    if content_test_failing && main_test_passes
+      "warning"
+    else
+      main_test_passes ? "ok" : "error"
+    end
+  end
+
   private
 
   def http_get(http_url)

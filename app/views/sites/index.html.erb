@@ -9,7 +9,7 @@
 
 <div class="sites">
   <% @sites.each do |site| %>
-    <h2><%= link_to site.name, site %></h2>
+    <h2 class="<%= site.latest_status %>"><%= link_to site.name, site %></h2>
     <p><%= site.url %></p>
   <% end %>
 </div>
