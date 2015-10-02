@@ -1,7 +1,7 @@
 class ContentTestsController < ApplicationController
 
   before_action :set_site
-  before_action :set_content_test, only: [:show, :edit, :update, :destroy]
+  before_action :set_content_test, only: [:show, :edit, :update, :destroy, :results]
 
   def new
     @test = ContentTest.new
@@ -27,6 +27,18 @@ class ContentTestsController < ApplicationController
     @test.save
     flash[:notice] = "Content test has been deleted."
     redirect_to site_path(@site)
+  end
+
+  def results
+    respond_to do |format|
+      format.csv do
+        results = @test.test_statuses.partition(&:result)
+        data = ["status,population",
+                "Passed,#{results.first.count}",
+                "Failed,#{results.last.count}"].join("\n")
+        render text: data
+      end
+    end
   end
 
   private
