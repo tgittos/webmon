@@ -24,7 +24,7 @@ RSpec.describe "user can view content test" do
 
   scenario "with history of results" do
     expect(find('#results ul')).to have_selector('li', count: 10)
-    expect(find('#results')).to have_content('OK')
+    expect(find('#results')).to have_css('li.ok')
   end
 
 end
