@@ -1,4 +1,7 @@
 language: ruby
 rvm:
   - 2.2.2
-script: rake db:migrate RAILS_ENV=test && bundle exec rspec
+before_script:
+  - psql -c 'create database webmon_test;' -U postgres
+script:
+  - rake db:migrate RAILS_ENV=test && bundle exec rspec
