@@ -57,7 +57,11 @@ Rails.application.routes.draw do
   root 'sites#index'
 
   resources :sites do
-    resources :content_tests
+    resources :content_tests do
+      member do
+        get :results, format: :csv
+      end
+    end
     member do
       get :response_times, format: :tsv
     end 
