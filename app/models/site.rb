@@ -28,7 +28,7 @@ class Site < ActiveRecord::Base
 
   def latest_status
     main_test_passes = site_healths.most_recent.http_response == 200 
-    content_test_failing = content_tests.collect(&:current_status).include?("Test failed")
+    content_test_failing = content_tests.active.collect(&:current_status).include?("Test failed")
     if content_test_failing && main_test_passes
       "warning"
     else
