@@ -1,5 +1,6 @@
 class SiteHealth < ActiveRecord::Base
   belongs_to :site
 
-  scope :most_recent, ->{ order('created_at DESC').first }
+  scope :newest_first, -> { order('created_at DESC') }
+  scope :most_recent, ->{ newest_first.first }
 end

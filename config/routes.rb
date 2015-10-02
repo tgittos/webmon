@@ -58,5 +58,8 @@ Rails.application.routes.draw do
 
   resources :sites do
     resources :content_tests
+    member do
+      get :response_times, format: :tsv
+    end 
   end
 end

@@ -6,7 +6,7 @@ class SiteMonitor
       Site.all.each do |site|
         Rails.logger.info "[Site Monitor] Checking #{site.url}"
         site.check!
-        site.content_tests.each do |content_test|
+        site.content_tests.active.each do |content_test|
           Rails.logger.info "[Site Monitor] Running content test: #{content_test.comparison} \"#{content_test.content}\""
           content_test.check!
         end
