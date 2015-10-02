@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151002050504) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "content_tests", force: :cascade do |t|
     t.string   "comparison"
     t.string   "content"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151002050504) do
     t.boolean  "active",     default: true
   end
 
-  add_index "content_tests", ["site_id"], name: "index_content_tests_on_site_id"
+  add_index "content_tests", ["site_id"], name: "index_content_tests_on_site_id", using: :btree
 
   create_table "site_healths", force: :cascade do |t|
     t.integer  "site_id"
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 20151002050504) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "site_healths", ["site_id"], name: "index_site_healths_on_site_id"
+  add_index "site_healths", ["site_id"], name: "index_site_healths_on_site_id", using: :btree
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +52,9 @@ ActiveRecord::Schema.define(version: 20151002050504) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "test_statuses", ["content_test_id"], name: "index_test_statuses_on_content_test_id"
+  add_index "test_statuses", ["content_test_id"], name: "index_test_statuses_on_content_test_id", using: :btree
 
+  add_foreign_key "content_tests", "sites"
+  add_foreign_key "site_healths", "sites"
+  add_foreign_key "test_statuses", "content_tests"
 end
