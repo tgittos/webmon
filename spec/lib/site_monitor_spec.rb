@@ -27,4 +27,11 @@ describe "site monitor" do
     SiteMonitor.update!
   end
 
+  it "doesn't run disabled content_tests" do
+    expect_any_instance_of(Site).to receive(:check!)
+    ContentTest.all.each { |ct| ct.active = false; ct.save }
+    expect_any_instance_of(ContentTest).to_not receive(:check!)
+    SiteMonitor.update!
+  end
+
 end
