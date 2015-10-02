@@ -20,4 +20,11 @@ describe "site monitor" do
     SiteMonitor.update!
   end
 
+  it "doesn't check a site that is disabled" do
+    @site.active = false
+    @site.save
+    expect_any_instance_of(Site).to_not receive(:check!)
+    SiteMonitor.update!
+  end
+
 end
