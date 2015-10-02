@@ -9,14 +9,24 @@ class ContentTest < ActiveRecord::Base
 
   after_save :check!
 
+  scope :active, ->{ where(active: true) }
+
   def self.comparisons
     ["matches", "doesn't match"]
+  end
+
+  def to_s
+    "#{comparison} \"#{content}\""
+  end
+
+  def latest_status
+    test_statuses.latest.result ? "ok" : "error"
   end
 
   def current_status
     latest = test_statuses.latest
     if latest
-      latest.result ? "OK" : "Content not found"
+      latest.result ? "OK" : "Test failed"
     else
       "Test not run yet"
     end
