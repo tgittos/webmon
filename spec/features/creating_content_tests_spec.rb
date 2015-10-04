@@ -5,6 +5,9 @@ RSpec.feature "Users can create content tests" do
   before do
     site = FactoryGirl.create(:site, name: "Google Status Page")
 
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
     visit site_path(site)
     click_link "New Test"
   end

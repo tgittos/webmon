@@ -1,0 +1,18 @@
+<script type="text/javascript">
+ $(document).ready(function(){
+     // this is demo scripts for testing the spiceworks app
+   var card = new SW.Card();
+   var environment = card.services('environment');
+   environment.request('environment').then(function(data){
+     $.post("accounts/create", data, function(response) {
+       if (response.status == "ok") {
+         window.location.replace("<%= sites_path %>");
+       } else {
+         $('h1').html('There was an error connecting your account');
+       }
+     });
+   });
+ });
+</script>
+
+<h1>Please wait while we connect your account</h1>

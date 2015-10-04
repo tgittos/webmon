@@ -88,14 +88,11 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.2)
-    mini_portile (0.6.2)
+    mini_portile (0.7.0.rc4)
     minitest (5.8.1)
     multi_json (1.11.2)
-    nokogiri (1.6.6.2)
-      mini_portile (~> 0.6.0)
-    nokogiri (1.6.6.2-x86-mingw32)
-      mini_portile (~> 0.6.0)
-    pg (0.18.3)
+    nokogiri (1.6.7.rc3-x86-mingw32)
+      mini_portile (~> 0.7.0.rc4)
     pg (0.18.3-x86-mingw32)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -171,7 +168,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.6)
+    tzinfo-data (1.2015.7)
       tzinfo (>= 1.0.0)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
@@ -185,7 +182,6 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
-  ruby
   x86-mingw32
 
 DEPENDENCIES
@@ -198,6 +194,7 @@ DEPENDENCIES
   font-awesome-rails (~> 4.3)
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri (= 1.6.7.rc3)
   pg
   rails (= 4.2.4)
   rspec-rails (~> 3.2.1)

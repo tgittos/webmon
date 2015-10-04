@@ -4,4 +4,3 @@
 # Mime::Type.register "text/richtext", :rtf
 
 Mime::Type.register "text/text", :tsv
-Mime::Type.register "text/text", :csv

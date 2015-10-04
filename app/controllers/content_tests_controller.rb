@@ -1,5 +1,6 @@
 class ContentTestsController < ApplicationController
-
+  
+  before_action :ensure_logged_in
   before_action :set_site
   before_action :set_content_test, only: [:show, :edit, :update, :destroy, :results]
 

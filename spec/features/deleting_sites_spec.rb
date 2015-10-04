@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.feature "Users can delete sites" do
+
+  before do
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
+  end
     
   scenario "successfully" do
     FactoryGirl.create(:site, name: "Google Status Page")

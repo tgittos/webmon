@@ -5,6 +5,10 @@ RSpec.feature "Users can edit existing sites" do
   before do
     FactoryGirl.create(:site, name: "Google Status Page")
 
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
+
     visit "/"
     click_link "Google Status Page"
     click_link "Edit Site"

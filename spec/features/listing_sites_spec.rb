@@ -4,6 +4,9 @@ RSpec.feature "Users can list sites" do
 
   before do
     @site = FactoryGirl.create(:site, name: "Google Status Page")
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
   end
 
   scenario "with the site details" do

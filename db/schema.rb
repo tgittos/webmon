@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002050504) do
+ActiveRecord::Schema.define(version: 20151004150131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20151002050504) do
   end
 
   add_index "test_statuses", ["content_test_id"], name: "index_test_statuses_on_content_test_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "app_uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   add_foreign_key "content_tests", "sites"
   add_foreign_key "site_healths", "sites"

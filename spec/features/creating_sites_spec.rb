@@ -3,6 +3,9 @@ require "rails_helper"
 RSpec.feature "Users can add new sites" do
 
   before do
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
     visit "/"
     click_link "New Site"
   end

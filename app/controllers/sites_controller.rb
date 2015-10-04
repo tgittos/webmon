@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  before_action :ensure_logged_in
   before_action :load_site, only: [:show, :edit, :update, :destroy, :response_times]
 
   def index
@@ -64,5 +65,5 @@ class SitesController < ApplicationController
   def load_site
     @site = Site.find(params[:id])
   end
-
+  
 end
