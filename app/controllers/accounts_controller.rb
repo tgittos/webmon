@@ -1,14 +1,16 @@
 class AccountsController < ApplicationController
 
   def register
-    redirect_to sites_path if session[:user]
+    if session[:user]
+      redirect_to sites_path
+    else
+      render(:layout => "layouts/blank")
+    end
   end
 
   def create
-    app_uid = params[:app_host][:auid]
+    app_uid = params[:app_host][:uid]
     user_email = params[:user][:email]
-    Rails.logger.info "app_uid: #{app_uid}"
-    Rails.logger.info "user_email: #{user_email}"
     session[:user] = User.find_or_create_by(email: user_email, app_uid: app_uid) 
     if !session[:user].nil?
       render json: { status: "ok" }

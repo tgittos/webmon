@@ -9,7 +9,7 @@ RSpec.feature "Users can delete sites" do
   end
     
   scenario "successfully" do
-    FactoryGirl.create(:site, name: "Google Status Page")
+    FactoryGirl.create(:site, user: @user, name: "Google Status Page")
 
     visit "/"
     click_link "Google Status Page"

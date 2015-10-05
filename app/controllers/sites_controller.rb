@@ -1,9 +1,10 @@
 class SitesController < ApplicationController
   before_action :ensure_logged_in
+  before_action :load_user, only: [:index, :create]
   before_action :load_site, only: [:show, :edit, :update, :destroy, :response_times]
 
   def index
-    @sites = Site.active
+    @sites = @user.sites.active
   end
 
   def new
@@ -11,9 +12,10 @@ class SitesController < ApplicationController
   end
 
   def create
-    @site = Site.new(site_params)
+    @site = Site.find_by(url: site_params[:url]) || Site.new(site_params)
+    @user.sites << @site
 
-    if @site.save
+    if @site.save && @user.save
       flash[:notice] = "Site has been created."
       redirect_to @site
     else
@@ -64,6 +66,10 @@ class SitesController < ApplicationController
 
   def load_site
     @site = Site.find(params[:id])
+  end
+
+  def load_user
+    @user = User.find(session["user"]["id"])
   end
   
 end

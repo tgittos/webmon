@@ -9,7 +9,7 @@ RSpec.feature "Users can delete content tests" do
   end
     
   scenario "successfully" do
-    site = FactoryGirl.create(:site, name: "Google Status Page")
+    site = FactoryGirl.create(:site, user: @user, name: "Google Status Page")
     content_test = FactoryGirl.create(:content_test, site: site, content: "foobar")
 
     visit "/"
