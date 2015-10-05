@@ -8,6 +8,10 @@ RSpec.feature "Users can view past content tests" do
       result = FactoryGirl.create(:content_test, site: @site, content: "Foobar #{n}")
       result.test_statuses << FactoryGirl.create(:test_status, content_test: result, result: true)
     end
+    
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
 
     visit site_path(@site)
   end

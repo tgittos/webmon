@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.feature "Users can edit existing sites" do
 
   before do
-    FactoryGirl.create(:site, name: "Google Status Page")
+    @user = FactoryGirl.create(:user)
+    FactoryGirl.create(:site, user: @user, name: "Google Status Page")
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
 
     visit "/"
     click_link "Google Status Page"

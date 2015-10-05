@@ -3,7 +3,17 @@ require "rails_helper"
 RSpec.feature "Users can list sites" do
 
   before do
-    @site = FactoryGirl.create(:site, name: "Google Status Page")
+    @user = FactoryGirl.create(:user)
+    @site = FactoryGirl.create(:site, user: @user, name: "Google Status Page")
+    FactoryGirl.create(:site, name: "Spiceworks Home Page")
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
+  end
+
+  scenario "that belong to them" do
+    visit "/"
+    expect(page).to have_content("Google Status Page")
+    expect(page).to_not have_content("Spiceworks Home Page")
   end
 
   scenario "with the site details" do

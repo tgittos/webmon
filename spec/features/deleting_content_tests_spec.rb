@@ -1,9 +1,15 @@
 require "rails_helper"
 
 RSpec.feature "Users can delete content tests" do
+
+  before do
+    @user = FactoryGirl.create(:user)
+    page.driver.post accounts_create_path, { user: { email: @user.email },
+                                             app_host: { uid: @user.app_uid } } 
+  end
     
   scenario "successfully" do
-    site = FactoryGirl.create(:site, name: "Google Status Page")
+    site = FactoryGirl.create(:site, user: @user, name: "Google Status Page")
     content_test = FactoryGirl.create(:content_test, site: site, content: "foobar")
 
     visit "/"

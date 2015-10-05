@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002050504) do
+ActiveRecord::Schema.define(version: 20151005010817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,10 @@ ActiveRecord::Schema.define(version: 20151002050504) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.boolean  "active",     default: true
+    t.integer  "user_id"
   end
+
+  add_index "sites", ["user_id"], name: "index_sites_on_user_id", using: :btree
 
   create_table "test_statuses", force: :cascade do |t|
     t.boolean  "result"
@@ -54,7 +57,15 @@ ActiveRecord::Schema.define(version: 20151002050504) do
 
   add_index "test_statuses", ["content_test_id"], name: "index_test_statuses_on_content_test_id", using: :btree
 
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "app_uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "content_tests", "sites"
   add_foreign_key "site_healths", "sites"
+  add_foreign_key "sites", "users"
   add_foreign_key "test_statuses", "content_tests"
 end

@@ -54,7 +54,9 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
-  root 'sites#index'
+  root 'accounts#register'
+
+  post 'accounts/create' => 'accounts#create' 
 
   resources :sites do
     resources :content_tests do
