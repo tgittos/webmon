@@ -12,7 +12,7 @@ class SitesController < ApplicationController
   end
 
   def create
-    @site = Site.find_by(url: site_params[:url]) || Site.new(site_params)
+    @site = Site.new(site_params)
     @user.sites << @site
 
     if @site.save && @user.save
@@ -69,6 +69,7 @@ class SitesController < ApplicationController
   end
 
   def load_user
+    Rails.logger.info "session: #{session["user"]}"
     @user = User.find(session["user"]["id"])
   end
   

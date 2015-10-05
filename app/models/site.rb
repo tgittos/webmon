@@ -2,8 +2,8 @@ require 'net/http'
 
 class Site < ActiveRecord::Base
 
-  has_many :site_healths
-  has_many :content_tests
+  has_many :site_healths, dependent: :destroy
+  has_many :content_tests, dependent: :destroy
   belongs_to :user
 
   validates :name, presence: true
