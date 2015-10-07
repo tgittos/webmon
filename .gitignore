@@ -21,3 +21,5 @@
 .DS_Store
 .ruby-gemset
 .ruby-version
+
+config/application.yml
