@@ -10,13 +10,20 @@ class AlertMailer < ApplicationMailer
   private
 
   def send_via_mg(user)
-    mg_client = Mailgun::Client.new ENV['api_key']
-    message_params = { from:    ENV['from'],
-                       to:      @user.email,
-                       subject: 'Sample Mail using Mailgun API',
-                       text:    'This mail is sent using Mailgun API via mailgun-ruby' }
-    mg_client.send_message ENV['domain'], message_params
-    mg_client.get("#{ENV['domain']}/events", { event: 'delivered' })
+    #mg_client = Mailgun::Client.new ENV['api_key']
+    #message_params = { from:    ENV['from'],
+    #                   to:      @user.email,
+    #                   subject: 'Sample Mail using Mailgun API',
+    #                   html:    render_email_html.to_str } 
+    #mg_client.send_message ENV['domain'], message_params
+    #mg_client.get("#{ENV['domain']}/events", { event: 'delivered' })
+  end
+
+  def render_email_html
+    ActionView::Base.new(Rails.configuration.paths["app/views"].first).render(
+      partial: "alert_mailer/alert_email", format: :html,
+      locals: { user: @user }
+    )
   end
 
 end
