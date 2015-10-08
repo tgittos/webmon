@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    h1 { font-size: 1.8em; }
+  </style>
+  <body>
+    <h1><%= @site.name %> Failed a Content Test</h1>
+    <p>
+    On <%= @result.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> failed the content test: <%= @test %>.
+    </p>
+  </body>
+</html>

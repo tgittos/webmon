@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    h1 { font-size: 1.8em; }
+  </style>
+  <body>
+    <h1><%= @site.name %> Returned Non-200 Response</h1>
+    <p>
+    On <%= @status.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= @status.http_response %> status.
+    </p>
+  </body>
+</html>
