@@ -51,6 +51,10 @@ group :test do
   gem 'timecop', '~> 0.8.0'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # Use Postgres as database
 gem 'pg'
 
