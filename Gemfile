@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # still need to use special Windows build of nokogiri
-gem 'nokogiri', '1.6.7.rc3'
+# gem 'nokogiri', '1.6.7.rc3'
+gem 'nokogiri'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
