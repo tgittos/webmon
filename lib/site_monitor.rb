@@ -13,7 +13,7 @@ class SiteMonitor
         site.content_tests.active.each do |content_test|
           Rails.logger.info "[Site Monitor] Running content test: #{content_test.comparison} \"#{content_test.content}\""
           result = content_test.check!
-          unless (result.result)
+          unless result
             Rails.logger.info "[Site Monitor] Sending content_test_failure email for result: #{result.inspect}"
             AlertMailer.content_test_failure(site.user, site, content_test)
           end
