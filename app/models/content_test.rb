@@ -1,7 +1,7 @@
 class ContentTest < ActiveRecord::Base
 
   belongs_to :site
-  has_many :test_statuses
+  has_many :test_statuses, dependent: :destroy
 
   validates :comparison, presence: true
   validates :content, presence: true

@@ -24,8 +24,7 @@ class ContentTestsController < ApplicationController
   end
 
   def destroy
-    @test.active = false
-    @test.save
+    @test.destroy
     flash[:notice] = "Content test has been deleted."
     redirect_to site_path(@site)
   end
