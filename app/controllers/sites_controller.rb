@@ -41,8 +41,7 @@ class SitesController < ApplicationController
   end
 
   def destroy
-    @site.active = false
-    @site.save
+    @site.destroy
     flash[:notice] = "Site has been deleted."
     redirect_to sites_path
   end
