@@ -63,3 +63,7 @@ gem 'simple_form', '~> 3.1.0'
 
 # Scheduling
 gem 'rufus-scheduler', '~> 3.1.5'
+
+# Email alerts
+#gem 'mailgun-ruby', '~> 1.0.2', require: 'mailgun'
+gem 'mailgun_rails'

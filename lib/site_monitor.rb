@@ -5,10 +5,18 @@ class SiteMonitor
       Rails.logger.info "[Site Monitor] Starting check..."
       Site.all.each do |site|
         Rails.logger.info "[Site Monitor] Checking #{site.url}"
-        site.check!
+        result = site.check!
+        if (result.http_response != 200)
+          Rails.logger.info "[Site Monitor] Sending status_failure email for result: #{result.inspect}"
+          AlertMailer.status_failure(site.user, site, result) 
+        end
         site.content_tests.active.each do |content_test|
           Rails.logger.info "[Site Monitor] Running content test: #{content_test.comparison} \"#{content_test.content}\""
-          content_test.check!
+          result = content_test.check!
+          unless (result.result)
+            Rails.logger.info "[Site Monitor] Sending content_test_failure email for result: #{result.inspect}"
+            AlertMailer.content_test_failure(site.user, site, content_test)
+          end
         end
       end
       Rails.logger.info "[Site Monitor] Done!"

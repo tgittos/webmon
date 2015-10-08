@@ -34,4 +34,16 @@ describe "site monitor" do
     SiteMonitor.update!
   end
 
+  it "tries to send a status_failure email when site check fails" do
+    expect(AlertMailer).to receive(:status_failure)
+    expect_any_instance_of(Site).to receive(:check!).and_return(FactoryGirl.create(:site_health, http_response: 500))
+    SiteMonitor.update!
+  end
+
+  it "tries to send a content_test_failure email when content test fails" do
+    expect(AlertMailer).to receive(:content_test_failure)
+    expect_any_instance_of(ContentTest).to receive(:check!).and_return(FactoryGirl.create(:test_status, result: false))
+    SiteMonitor.update!
+  end
+
 end
