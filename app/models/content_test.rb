@@ -41,6 +41,7 @@ class ContentTest < ActiveRecord::Base
       page_content !~ /#{content}/
     end == false
     test_status.save!
+    test_status
   end
 
 end
