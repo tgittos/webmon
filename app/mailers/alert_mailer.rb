@@ -8,7 +8,7 @@ class AlertMailer < ApplicationMailer
     @test = test
     @result = test.test_statuses.latest
     mail to: @user.email,
-         subject: "Webmon: #{@site.name} failed a content test"
+         subject: "Webmon: \"#{@site.name}\" failed a content test"
   end
 
   def status_failure(user, site, status)
@@ -16,7 +16,15 @@ class AlertMailer < ApplicationMailer
     @site = site
     @status = status
     mail to: @user.email,
-         subject: "Webmon: #{@site.name} returned a non 200 status"
+         subject: "Webmon: \"#{@site.name}\" returned a non 200 status"
+  end
+
+  def rolled_up_failure(user, site, errors)
+    @user = user
+    @site = site
+    @errors = errors
+    mail to: @user.email,
+         subject: "Webmon: \"#{@site.name}\" has errors"
   end
 
 end

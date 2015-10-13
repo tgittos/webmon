@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    h1 { font-size: 1.8em; }
+  </style>
+  <body>
+    <h1>"<%= @site.name %>" has <%= @errors.count > 1 ? "errors" : "an error" %></h1>
+    <% @errors.each do |error| %>
+      <% if error.is_a? SiteHealth %>
+        <h3>Returned a Non-200 Response</h3>
+        <p>
+          On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= error.http_response %> status.
+          </p>
+      <% else %> 
+        <h3>Failed a Content Test</h3>
+        <p>
+        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> failed the content test: <%= error %>.
+        </p>
+      <% end %>
+    <% end %>
+  </body>
+</html>

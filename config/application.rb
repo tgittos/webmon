@@ -28,5 +28,8 @@ module Webmon
 
     # Autoload lib
     config.autoload_paths << Rails.root.join('lib')
+
+    # Configure the logger
+    config.logger = ::Logger.new(STDOUT)
   end
 end
