@@ -64,8 +64,15 @@ Rails.application.routes.draw do
         get :results, format: :csv
       end
     end
-    member do
-      get :response_times, format: :tsv
+    resources :response_tests do
+      member do
+        get :results, format: :csv
+      end
+    end 
+    resources :response_time_tests do
+      member do
+        get :results, format: :tsv
+      end
     end 
   end
 end

@@ -1,15 +1,15 @@
-class ContentTestsController < ApplicationController
+class ResponseTestsController < ApplicationController
   
   before_action :ensure_logged_in
   before_action :set_site
   before_action :set_content_test, only: [:show, :edit, :update, :destroy, :results]
 
   def new
-    @test = ContentTest.new
+    @test = ResponseTest.new
   end
 
   def create
-    @test = ContentTest.new(content_test_params)
+    @test = ResponseTest.new(response_test_params)
     @site.tests << @test
 
     if @test.save
@@ -52,8 +52,8 @@ class ContentTestsController < ApplicationController
     @test = @site.tests.find(params[:id])
   end
 
-  def content_test_params
-    params.require(:content_test).permit(:comparison, :content)
+  def response_test_params
+    params.require(:response_test).permit(:comparison, :content)
   end
 
 end

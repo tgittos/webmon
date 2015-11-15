@@ -46,17 +46,6 @@ class SitesController < ApplicationController
     redirect_to sites_path
   end
 
-  def response_times
-    respond_to do |format|
-      format.tsv do
-        data = ["date\tresponse"].concat(@site.site_healths.newest_first.limit(100).collect do |sh|
-          "#{sh.created_at.strftime("%Y-%m-%d-%H:%M")}\t#{sh.response_time}"
-        end).join("\n")
-        render text: data
-      end
-    end
-  end
-
   private
 
   def site_params

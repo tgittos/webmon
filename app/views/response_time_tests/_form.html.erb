@@ -1,0 +1,6 @@
+<%= simple_form_for([site, test]) do |f| %>
+  <%= f.input :comparison, collection: ResponseTimeTest.comparisons %>
+  <%= f.input :content %>
+
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>

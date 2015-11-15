@@ -1,15 +1,15 @@
-class ContentTestsController < ApplicationController
+class ResponseTimeTestsController < ApplicationController
   
   before_action :ensure_logged_in
   before_action :set_site
   before_action :set_content_test, only: [:show, :edit, :update, :destroy, :results]
 
   def new
-    @test = ContentTest.new
+    @test = ResponseTimeTest.new
   end
 
   def create
-    @test = ContentTest.new(content_test_params)
+    @test = ResponseTimeTest.new(response_time_test_params)
     @site.tests << @test
 
     if @test.save
@@ -32,11 +32,10 @@ class ContentTestsController < ApplicationController
 
   def results
     respond_to do |format|
-      format.csv do
-        results = @test.test_results.partition(&:result)
-        data = ["status,population",
-                "Passed,#{results.first.count}",
-                "Failed,#{results.last.count}"].join("\n")
+      format.tsv do
+        data = ["date\tresponse"].concat(@test.test_results.newest_first.limit(100).collect do |sh|
+          "#{sh.created_at.strftime("%Y-%m-%d-%H:%M")}\t#{sh.value}"
+        end).join("\n")
         render text: data
       end
     end
@@ -52,8 +51,8 @@ class ContentTestsController < ApplicationController
     @test = @site.tests.find(params[:id])
   end
 
-  def content_test_params
-    params.require(:content_test).permit(:comparison, :content)
+  def response_time_test_params
+    params.require(:response_time_test).permit(:comparison, :content)
   end
 
 end

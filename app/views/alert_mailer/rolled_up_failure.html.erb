@@ -12,15 +12,18 @@
   <body>
     <h1>"<%= @site.name %>" has <%= @errors.count > 1 ? "errors" : "an error" %></h1>
     <% @errors.each do |error| %>
-      <% if error.is_a? SiteHealth %>
-        <h3>Returned a Non-200 Response</h3>
+      <% if error.test.is_a? ResponseTest %>
+        <h3>Returned a Non-<%= error.test.content %> Response</h3>
         <p>
-          On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= error.http_response %> status.
+          On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= error.value %> status.
           </p>
-      <% else %> 
+      <% elsif error.test.is_a? ResponseTimeTest %> 
+        <h3>Didn't Respond in Time</h3>
+        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> responded in <%= error.value %>ms.
+      <% else %>
         <h3>Failed a Content Test</h3>
         <p>
-        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> failed the content test: <%= error %>.
+        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> failed the content test: <%= error.test %>.
         </p>
       <% end %>
     <% end %>

@@ -11,21 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005010817) do
+ActiveRecord::Schema.define(version: 20151111040239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "content_tests", force: :cascade do |t|
-    t.string   "comparison"
-    t.string   "content"
-    t.integer  "site_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.boolean  "active",     default: true
-  end
-
-  add_index "content_tests", ["site_id"], name: "index_content_tests_on_site_id", using: :btree
 
   create_table "site_healths", force: :cascade do |t|
     t.integer  "site_id"
@@ -48,14 +37,27 @@ ActiveRecord::Schema.define(version: 20151005010817) do
 
   add_index "sites", ["user_id"], name: "index_sites_on_user_id", using: :btree
 
-  create_table "test_statuses", force: :cascade do |t|
+  create_table "test_results", force: :cascade do |t|
     t.boolean  "result"
-    t.integer  "content_test_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "test_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "value"
   end
 
-  add_index "test_statuses", ["content_test_id"], name: "index_test_statuses_on_content_test_id", using: :btree
+  add_index "test_results", ["test_id"], name: "index_test_results_on_test_id", using: :btree
+
+  create_table "tests", force: :cascade do |t|
+    t.string   "comparison"
+    t.string   "content"
+    t.integer  "site_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "active",     default: true
+    t.string   "type"
+  end
+
+  add_index "tests", ["site_id"], name: "index_tests_on_site_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -64,8 +66,8 @@ ActiveRecord::Schema.define(version: 20151005010817) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "content_tests", "sites"
   add_foreign_key "site_healths", "sites"
   add_foreign_key "sites", "users"
-  add_foreign_key "test_statuses", "content_tests"
+  add_foreign_key "test_results", "tests"
+  add_foreign_key "tests", "sites"
 end
