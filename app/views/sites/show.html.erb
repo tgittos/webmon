@@ -1,5 +1,5 @@
 <header>
-  <h1><%= @site.name %></h1>
+  <h1 id="site-title"><%= @site.name %></h1>
 
   <ul class="actions">
     <li><%= link_to "Edit Site", edit_site_path(@site),
@@ -16,7 +16,7 @@
   <h2>Tests</h2>
 
   <div class="btn-group actions">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    <button type="button" class="btn btn-primary dropdown-toggle" id="new-test" data-toggle="dropdown" aria-expanded="false">
       New <span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
