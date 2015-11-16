@@ -2,6 +2,8 @@ class Test < ActiveRecord::Base
   
   belongs_to :site
   has_many :test_results, dependent: :destroy
+  has_many :incident_tests
+  has_many :incidents, through: :incident_tests
   
   validates :comparison, presence: true
   validates :content, presence: true

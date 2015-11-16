@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111040239) do
+ActiveRecord::Schema.define(version: 20151116031753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "incident_tests", force: :cascade do |t|
+    t.integer  "incident_id"
+    t.integer  "test_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "incidents", force: :cascade do |t|
+    t.integer  "site_id"
+    t.datetime "cleared_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "site_healths", force: :cascade do |t|
     t.integer  "site_id"
@@ -51,10 +65,12 @@ ActiveRecord::Schema.define(version: 20151111040239) do
     t.string   "comparison"
     t.string   "content"
     t.integer  "site_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.boolean  "active",     default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "active",            default: true
     t.string   "type"
+    t.integer  "failure_threshold"
+    t.integer  "clear_threshold"
   end
 
   add_index "tests", ["site_id"], name: "index_tests_on_site_id", using: :btree
