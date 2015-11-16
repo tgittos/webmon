@@ -31,7 +31,12 @@ class Test < ActiveRecord::Base
   private
 
   def email_thresholds
-    failure_threshold > 0 && clear_threshold > 0 
+    if (failure_threshold || 0) <= 0
+      errors.add(:failure_threshold, 'cannot be less than 1')
+    end
+    if (clear_threshold || 0) <= 0
+      errors.add(:clear_threshold, 'cannot be less than 1')
+    end 
   end
 
 end

@@ -15,13 +15,13 @@
       <h3>"<%= @site.name %>" stopped failing test "<%= test %>"</h3>
       <% if test.is_a? ResponseTest %>
         <p>
-          On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= test.results.latest.value %> status.
+          On <%= test.test_results.latest.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= test.test_results.latest.value %> status.
           </p>
-      <% elsif error.test.is_a? ResponseTimeTest %> 
-        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> responded in <%= test.results.latest.value %>ms.
+      <% elsif test.is_a? ResponseTimeTest %> 
+        On <%= test.test_results.latest.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> responded in <%= test.test_results.latest.value %>ms.
       <% else %>
         <p>
-        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> passed the content test: <%= test %>.
+        On <%= test.test_results.latest.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> passed the content test: <%= test %>.
         </p>
       <% end %>
     <% end %>

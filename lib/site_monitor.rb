@@ -11,13 +11,13 @@ class SiteMonitor
           result = test.check!
           if !result.result
             # lets add to the errors if the error threshold has been hit
-            results = test.test_results.newest_first.take(test.failure_threshold).collect{|tr| tr.result}
+            results = Array.wrap(test.test_results.newest_first.take(test.failure_threshold)).collect{|tr| tr.result}
             if results.count == test.failure_threshold && test.incidents.active.count == 0 && !results.include?(true)
               errors << result unless result.result
             end
           else
             # lets clear the incident if the clear threshold has been hit
-            results = test.test_results.newest_first.take(test.clear_threshold).collect{|tr| tr.result}
+            results = Array.wrap(test.test_results.newest_first.take(test.clear_threshold)).collect{|tr| tr.result}
             if results.count == test.clear_threshold && test.incidents.active.count > 0 && !results.include?(false)
               test.incidents.last.clear
             end
