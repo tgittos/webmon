@@ -72,3 +72,7 @@ gem 'rufus-scheduler', '~> 3.1.5'
 # Email alerts
 #gem 'mailgun-ruby', '~> 1.0.2', require: 'mailgun'
 gem 'mailgun_rails'
+
+# Onboarding
+gem 'hopscotch-rails'
+gem 'js_cookie_rails'
