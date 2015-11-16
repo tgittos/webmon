@@ -79,6 +79,14 @@ describe "site monitor" do
     expect(Incident.active.count).to eq incident_count
   end
 
+  it "doesn't try to clear an alert unless one exists" do
+    FactoryGirl.create(:test_result, test: @site.tests.first, result: true)
+    expect_any_instance_of(ContentTest).to receive(:check!) { FactoryGirl.create(:test_result, test: @site.tests.first, result: true) }
+    expect_any_instance_of(ResponseTest).to receive(:check!) { passed_test }
+    expect_any_instance_of(ResponseTimeTest).to receive(:check!) { passed_test }
+    SiteMonitor.update!
+  end
+
   private
 
   def passed_test

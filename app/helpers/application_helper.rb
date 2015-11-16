@@ -6,10 +6,10 @@ module ApplicationHelper
                         .uniq
     if results.include?(true) && results.include?(false)
       "warning"
-    elsif results.include?(true)
-      "ok"
     elsif results.include?(false)
       "error"
+    else
+      "ok"
     end
   end
 

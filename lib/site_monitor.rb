@@ -18,7 +18,7 @@ class SiteMonitor
           else
             # lets clear the incident if the clear threshold has been hit
             results = test.test_results.newest_first.take(test.clear_threshold).collect{|tr| tr.result}
-            if results.count == test.clear_threshold && !results.include?(false)
+            if results.count == test.clear_threshold && test.incidents.active.count > 0 && !results.include?(false)
               test.incidents.last.clear
             end
           end
