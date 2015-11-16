@@ -7,6 +7,7 @@ class SiteMonitor
         errors = []
         Rails.logger.info "[Site Monitor] Checking #{site.url}"
         site.tests.each do |test|
+          Rails.logger.info "[Site Monitor] Running test #{test.to_s}"
           result = test.check!
           errors << result unless result.result
         end

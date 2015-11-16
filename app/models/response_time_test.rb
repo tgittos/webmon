@@ -1,7 +1,7 @@
 class ResponseTimeTest < Test
   
   def self.comparisons
-    ["greater than", "less than"]
+    ["less than", "greater than"]
   end
   
   def check!

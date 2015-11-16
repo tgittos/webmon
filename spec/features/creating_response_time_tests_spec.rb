@@ -9,21 +9,21 @@ RSpec.feature "Users can create content tests" do
     page.driver.post accounts_create_path, { user: { email: @user.email },
                                              app_host: { uid: @user.app_uid } } 
     visit site_path(site)
-    click_link "New Content Test"
+    click_link "New Response Time Test"
   end
 
   scenario "with valid attributes" do
-    select("matches", from: "content_test_comparison")
-    fill_in "Content", with: "Foobar"
-    click_button "Create Content test"
+    select("less than", from: "response_time_test_comparison")
+    fill_in "Content", with: "500"
+    click_button "Create Response time test"
 
-    expect(page).to have_content "Content test has been created."
+    expect(page).to have_content "Response time test has been created."
   end
 
   scenario "with invalid attributes" do
-    click_button "Create Content test"
+    click_button "Create Response time test"
 
-    expect(page).to have_content "Content test has not been created."
+    expect(page).to have_content "Response time test has not been created."
     expect(page).to have_content "Contentcan't be blank"
   end
 

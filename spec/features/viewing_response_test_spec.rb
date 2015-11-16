@@ -15,7 +15,7 @@ RSpec.describe "user can view test" do
     page.driver.post accounts_create_path, { user: { email: @user.email },
                                              app_host: { uid: @user.app_uid } } 
 
-    visit site_content_test_path(@site, @test)
+    visit site_response_test_path(@site, @test)
   end
 
   scenario "with the site name" do

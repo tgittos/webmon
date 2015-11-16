@@ -28,7 +28,7 @@
 </header>
 
 <% if not @site.tests.empty? %>
-<div id="content_tests" class="status">
+<div id="tests" class="status">
   <ul>
     <% @site.tests.active.each do |test| %>
       <li class="<%= test_css_class(test) %>"><%= link_to test.to_s, site_test_path(@site, test) %></li>

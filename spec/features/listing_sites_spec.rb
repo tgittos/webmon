@@ -23,24 +23,18 @@ RSpec.feature "Users can list sites" do
     expect(page.current_url).to eq site_url(@site)
   end
 
-  scenario "with the site's current HTTP status" do
-    FactoryGirl.create(:site_health, site: @site, http_response: 200)
+  scenario "with a list of current tests" do
+    [:content_test, :response_test, :response_time_test].each do |test_type|
+      FactoryGirl.create(test_type, site: @site) 
+    end
 
     visit "/"
     click_link "Google Status Page"
 
-    expect(page).to have_content "200"
+    Test.all.each do |test|
+      expect(page).to have_content test.to_s
+    end
   end
 
-  scenario "with the site's current response time" do
-    SiteHealth.destroy_all # shouldn't have to do this?
-
-    FactoryGirl.create(:site_health, site: @site, response_time: 200)
-
-    visit "/"
-    click_link "Google Status Page"
-
-    expect(page).to have_content "200ms"
-  end
 end
 

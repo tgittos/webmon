@@ -4,7 +4,7 @@ RSpec.describe "user can view test" do
 
   before do
     @site = FactoryGirl.create(:site, name: "Google Status Page")
-    @test = FactoryGirl.create(:content_test, site: @site, content: "foobar")
+    @test = FactoryGirl.create(:response_time_test, site: @site, content: "foobar")
     
     # 9 times, cause creating the initial content test creates a test_status
     9.times do
@@ -15,7 +15,7 @@ RSpec.describe "user can view test" do
     page.driver.post accounts_create_path, { user: { email: @user.email },
                                              app_host: { uid: @user.app_uid } } 
 
-    visit site_content_test_path(@site, @test)
+    visit site_response_time_test_path(@site, @test)
   end
 
   scenario "with the site name" do

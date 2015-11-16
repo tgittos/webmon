@@ -2,7 +2,7 @@ class ResponseTestsController < ApplicationController
   
   before_action :ensure_logged_in
   before_action :set_site
-  before_action :set_content_test, only: [:show, :edit, :update, :destroy, :results]
+  before_action :set_response_test, only: [:show, :edit, :update, :destroy, :results]
 
   def new
     @test = ResponseTest.new
@@ -13,10 +13,10 @@ class ResponseTestsController < ApplicationController
     @site.tests << @test
 
     if @test.save
-      flash[:notice] = "Content test has been created."
+      flash[:notice] = "Response test has been created."
       redirect_to [@site, @test]
     else
-      flash.now[:alert] = "Content test has not been created."
+      flash.now[:alert] = "Response test has not been created."
       render "new"
     end
   end
@@ -26,7 +26,7 @@ class ResponseTestsController < ApplicationController
 
   def destroy
     @test.destroy
-    flash[:notice] = "Content test has been deleted."
+    flash[:notice] = "Response test has been deleted."
     redirect_to site_path(@site)
   end
 
@@ -48,7 +48,7 @@ class ResponseTestsController < ApplicationController
     @site = Site.find(params[:site_id])
   end
 
-  def set_content_test
+  def set_response_test
     @test = @site.tests.find(params[:id])
   end
 
