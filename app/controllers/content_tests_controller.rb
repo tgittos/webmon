@@ -53,7 +53,7 @@ class ContentTestsController < ApplicationController
   end
 
   def content_test_params
-    params.require(:content_test).permit(:comparison, :content)
+    params.require(:content_test).permit(:comparison, :content, :failure_threshold, :clear_threshold)
   end
 
 end

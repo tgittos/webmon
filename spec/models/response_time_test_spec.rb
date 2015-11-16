@@ -6,7 +6,6 @@ RSpec.describe ContentTest, type: :model do
     @site = FactoryGirl.create(:site)
     # sites always take 100ms to respond
     Site.any_instance.stub(:fetch) do
-      puts "calling stubbed fetch method"
       sleep(0.1)
       double("Object", body: "foobar")
     end

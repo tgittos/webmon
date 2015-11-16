@@ -52,7 +52,7 @@ class ResponseTimeTestsController < ApplicationController
   end
 
   def response_time_test_params
-    params.require(:response_time_test).permit(:comparison, :content)
+    params.require(:response_time_test).permit(:comparison, :content, :failure_threshold, :clear_threshold)
   end
 
 end

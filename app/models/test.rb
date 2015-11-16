@@ -8,6 +8,7 @@ class Test < ActiveRecord::Base
   validates :comparison, presence: true
   validates :content, presence: true
   validates :content, uniqueness: { scope: :comparison }
+  validate :email_thresholds 
   
   after_create :check!
   
@@ -26,6 +27,11 @@ class Test < ActiveRecord::Base
   def check!
     raise "check! should be implemented in a sub-class"
   end
-  
+ 
+  private
+
+  def email_thresholds
+    failure_threshold > 0 && clear_threshold > 0 
+  end
 
 end
