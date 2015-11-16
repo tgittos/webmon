@@ -18,7 +18,7 @@ class ResponseTest < Test
   end
   
   def to_s
-    "#{comparison} #{content}"
+    "HTTP status #{comparison} #{content}"
   end
 
 end

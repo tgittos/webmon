@@ -7,7 +7,7 @@ class Test < ActiveRecord::Base
   validates :content, presence: true
   validates :content, uniqueness: { scope: :comparison }
   
-  after_save :check!
+  after_create :check!
   
   scope :active, ->{ where(active: true) }
 
@@ -25,8 +25,5 @@ class Test < ActiveRecord::Base
     raise "check! should be implemented in a sub-class"
   end
   
-  def to_s
-    "#{comparison} \"#{content}\""
-  end
 
 end

@@ -16,5 +16,9 @@ class ContentTest < Test
     test_result.save!
     test_result
   end
+  
+  def to_s
+    "page content #{comparison} \"#{content}\""
+  end
 
 end

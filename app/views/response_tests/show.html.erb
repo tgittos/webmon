@@ -15,7 +15,7 @@
   <div id="results" class="status">
     <ul>
     <% @test.test_results.newest_first.limit(10).each do |result|%>
-      <li class="<%= test_result_css_class(result) %>"><span title="<%= result.created_at %>"><%= time_ago_in_words(result.created_at) %> ago</span></li>
+      <li class="<%= test_result_css_class(result) %>">responded with <%= result.value %> status <span title="<%= result.created_at %>"><%= time_ago_in_words(result.created_at) %> ago</span></li>
     <% end %>
     </ul>
   </div>

@@ -11,15 +11,11 @@ class Site < ActiveRecord::Base
   scope :active, ->{ where(active: true) }
 
   def fetch
-    @response ||= http_get(url)
+    http_get(url)
   end
 
   def fetch_body
-    @content ||= fetch.body
-  end
-
-  def latest_status
-    # check if the latest result of any test is a failure
+    fetch.body
   end
 
   private

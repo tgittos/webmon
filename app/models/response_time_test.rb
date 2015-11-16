@@ -22,7 +22,7 @@ class ResponseTimeTest < Test
   end
   
   def to_s
-    "#{comparison} #{content}ms"
+    "server responded in #{comparison} #{content}ms"
   end
 
 end
