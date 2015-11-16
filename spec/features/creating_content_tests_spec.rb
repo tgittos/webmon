@@ -9,7 +9,7 @@ RSpec.feature "Users can create content tests" do
     page.driver.post accounts_create_path, { user: { email: @user.email },
                                              app_host: { uid: @user.app_uid } } 
     visit site_path(site)
-    click_link "New Test"
+    click_link "New Content Test"
   end
 
   scenario "with valid attributes" do

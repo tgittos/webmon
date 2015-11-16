@@ -6,29 +6,35 @@ class SiteMonitor
       Site.all.each do |site|
         errors = []
         Rails.logger.info "[Site Monitor] Checking #{site.url}"
-        result = site.check!
-        if (result.http_response != 200)
-          #Rails.logger.info "[Site Monitor] Sending status_failure email for result: #{result.inspect}"
-          errors << result
-          #AlertMailer.status_failure(site.user, site, result).deliver_now 
-        end
-        site.content_tests.active.each do |content_test|
-          Rails.logger.info "[Site Monitor] Running content test: #{content_test.comparison} \"#{content_test.content}\""
-          content_result = content_test.check!
-          unless (content_result.result)
-            #Rails.logger.info "[Site Monitor] Sending content_test_failure email for result: #{content_result.inspect}"
-            errors << content_test
-            #AlertMailer.content_test_failure(site.user, site, content_test).deliver_now
+        site.tests.each do |test|
+          Rails.logger.info "[Site Monitor] Running test #{test.to_s}"
+          result = test.check!
+          if !result.result
+            # lets add to the errors if the error threshold has been hit
+            results = Array.wrap(test.test_results.newest_first.take(test.failure_threshold)).collect{|tr| tr.result}
+            if results.count == test.failure_threshold && test.incidents.active.count == 0 && !results.include?(true)
+              errors << result unless result.result
+            end
+          else
+            # lets clear the incident if the clear threshold has been hit
+            results = Array.wrap(test.test_results.newest_first.take(test.clear_threshold)).collect{|tr| tr.result}
+            if results.count == test.clear_threshold && test.incidents.active.count > 0 && !results.include?(false)
+              test.incidents.last.clear
+            end
           end
-          if errors.count > 0
-            Rails.logger.info "[Site Monitor] Sending rolled_up_failure email for errors: #{errors.inspect}"
-            AlertMailer.rolled_up_failure(site.user, site, errors).deliver_now
+        end
+        if errors.count > 0
+          Rails.logger.info "[Site Monitor] Sending rolled_up_failure email for errors: #{errors.inspect}"
+          if !ENV['WEBMON_NO_EMAIL']
+            incident = Incident.create site: site, tests: errors.collect{|e| e.test}
+          else
+            Rails.logger.info "WEBMON_NO_EMAIL set, not sending email alerts"
           end
         end
       end
       Rails.logger.info "[Site Monitor] Done!"
     rescue Exception => e
-      Rails.logger.info "[Site Monitor] Error running site check: #{e.message}: #{e.backtrace.join("\n")}"
+      Rails.logger.error "[Site Monitor] Error running site check: #{e.message}: #{e.backtrace.join("\n")}"
     ensure
     end
   end

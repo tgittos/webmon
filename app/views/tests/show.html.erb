@@ -1,0 +1,70 @@
+<div id="content_test">
+  <header>
+    <h1><%= link_to @site.name, site_path(@site) %></h1>
+  </header>
+
+  <header>
+    <h4><%= @test.comparison %> "<%= @test.content %>"</h4>
+    <ul class="actions">
+      <li><%= link_to "Delete Content Test", site_content_test_path(@site, @test),
+        method: :delete,
+        class: "btn delete" %></li>
+    </ul>
+  </header>
+
+  <div id="results" class="status">
+    <ul>
+    <% @test.test_statuses.newest_first.limit(10).each do |result|%>
+      <li class="<%= result.css_class %>"><span title="<%= result.created_at %>"><%= time_ago_in_words(result.created_at) %> ago</span></li>
+    <% end %>
+    </ul>
+  </div>
+  <div id="result_chart">
+  </div>
+  <script>
+    var width = 300,
+        height = 300,
+        radius = Math.min(width, height) / 2;
+
+    var color = d3.scale.ordinal()
+        .range(["#00ff8c", "#ff8c00"]);
+
+    var arc = d3.svg.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) { return d.population; });
+
+    var svg = d3.select("#result_chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    d3.csv("<%= results_site_content_test_path(@site, @test, format: :csv) %>", function(error, data) {
+
+      data.forEach(function(d) {
+        d.population = +d.population;
+      });
+
+      var g = svg.selectAll(".arc")
+          .data(pie(data))
+        .enter().append("g")
+          .attr("class", "arc");
+
+      g.append("path")
+          .attr("d", arc)
+          .style("fill", function(d) { return color(d.data.status); });
+
+      g.append("text")
+          .filter(function(d) { return d.data.status == "Passed"; })
+          .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+          .attr("dy", ".35em")
+          .style("text-anchor", "middle")
+          .text(function(d) { return d.data.status; });
+
+    }); 
+  </script>
+</div>

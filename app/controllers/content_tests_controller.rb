@@ -9,7 +9,8 @@ class ContentTestsController < ApplicationController
   end
 
   def create
-    @test = @site.content_tests.build(content_test_params)
+    @test = ContentTest.new(content_test_params)
+    @site.tests << @test
 
     if @test.save
       flash[:notice] = "Content test has been created."
@@ -32,7 +33,7 @@ class ContentTestsController < ApplicationController
   def results
     respond_to do |format|
       format.csv do
-        results = @test.test_statuses.partition(&:result)
+        results = @test.test_results.partition(&:result)
         data = ["status,population",
                 "Passed,#{results.first.count}",
                 "Failed,#{results.last.count}"].join("\n")
@@ -48,11 +49,11 @@ class ContentTestsController < ApplicationController
   end
 
   def set_content_test
-    @test = @site.content_tests.find(params[:id])
+    @test = @site.tests.find(params[:id])
   end
 
   def content_test_params
-    params.require(:content_test).permit(:comparison, :content)
+    params.require(:content_test).permit(:comparison, :content, :failure_threshold, :clear_threshold)
   end
 
 end

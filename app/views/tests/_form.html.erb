@@ -1,0 +1,7 @@
+<%= simple_form_for([site, test]) do |f| %>
+  <%= f.input :type, collection: Test.types, label_method: ->(t){ t[:label]}, value_method: ->(t){ t[:value] } %>
+  <%= f.input :comparison, collection: ContentTest.comparisons %>
+  <%= f.input :content %>
+
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>
