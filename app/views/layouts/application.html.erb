@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webmon</title>
+  <title>URL Up</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <script src="https://spiceworks.github.io/spiceworks-js-sdk/dist/spiceworks-sdk.js" type="text/javascript"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -49,11 +49,15 @@
   <div class="container">
     <ul class="nav navbar-nav">
       <li class="feature-request">
-        <a href="mailto:timg@spiceworks.com?subject=It'd be awesome if Webmon...">Feature request?</a>
+        <a href="mailto:timg@spiceworks.com?subject=It'd be awesome if URL Up...">Feature request?</a>
       </li>
       <li>
         <a href="http://www.spiceworks.com/terms-and-privacy/">Privacy policy</a>
       </li>
+      <li>
+        <a href="mailto:timg@spiceworks.com?subject=I need help with URL Up!">
+          <%= image_tag "help.png", class: "help" %>
+        </a>
     </ul>
   </div>
 </footer>
