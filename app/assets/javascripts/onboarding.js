@@ -3,28 +3,28 @@ var tour = {
   steps: [
     {
       title: "Lets get started!",
-      content: "Lets get started monitoring websites. Click here to add a website",
+      content: "Lets get started monitoring websites. Click here to add a website.",
       target: "new-site",
       placement: "left",
       multipage: true,
       showNextButton: false
     },
     {
-      title: "Give your site a name",
+      title: "Enter the name of this site.",
       target: "site_name",
       placement: "right",
       nextOnTargetClick: true,
       showNextButton: false
     },
     {
-      title: "Enter the site's URL",
+      title: "Enter the site's URL.",
       target: "site_url",
       placement: "right",
       nextOnTargetClick: true,
       showNextButton: false
     },
     {
-      title: "Click here to save your site",
+      title: "Click here to save your site.",
       target: "create-site",
       placement: "right",
       multipage: true,
@@ -37,7 +37,7 @@ var tour = {
       placement: "bottom"
     },
     {
-      title: "Click here to add a test",
+      title: "Click here to add a test.",
       target: "new-test",
       placement: "top",
       xOffset: -200,
@@ -48,20 +48,20 @@ var tour = {
     { 
       title: "Choose how to compare",
       target: ['content_test_comparison', 'response_test_comparison', 'response_time_test_comparison'],
-      description: "Select how to compare the value you're testing for",
+      description: "Select how to compare the value you're testing for.",
       placement: "right",
       nextOnTargetClick: true,
       showNextButton: false
     },
     {
-      title: "Select value to test against",
+      title: "Select value to test against.",
       target: ['content_test_content', 'response_test_content', 'response_time_test_content'],
       placement: "right",
       nextOnTargetClick: true,
       showNextButton: false
     },
     {
-      title: "Create your test",
+      title: "Create your test.",
       target: "create-test",
       placement: "right",
       multipage: true,
@@ -69,7 +69,7 @@ var tour = {
     },
     {
       title: "You've just added a test!",
-      content: "Great work! On this test page, you can track the history of your test",
+      content: "Great work! On this test page, you can track the history of your test.",
       target: "results",
       placement: "right",
       multipage: true,

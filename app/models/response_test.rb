@@ -1,4 +1,6 @@
 class ResponseTest < Test
+
+  validates :content, numericality: { only_integer: true }
   
   def self.comparisons
     ["equals", "doesn't equal"]

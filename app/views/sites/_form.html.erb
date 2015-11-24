@@ -14,8 +14,8 @@
 
 <%= simple_form_for(@site) do |f| %>
 
-  <%= f.input :name %>
-  <%= f.input :url %>
+  <%= f.input :name, label: "Name <em class=\"hint\">The name of the site</em>".html_safe %>
+  <%= f.input :url, label: "URL <em class=\"hint\">The URL of the site</em>".html_safe %>
 
   <%= f.button :submit, class: 'btn-primary', id: 'create-site' %>
     
