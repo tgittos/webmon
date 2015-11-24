@@ -1,5 +1,7 @@
 class ResponseTimeTest < Test
   
+  validates :content, numericality: { only_integer: true }
+  
   def self.comparisons
     ["less than", "greater than"]
   end
