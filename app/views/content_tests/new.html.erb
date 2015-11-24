@@ -5,4 +5,9 @@
   <h3><%= link_to @site.name, @site %></h3>
 </header>
 
+<p class="info">
+A content test will look for certain text on a page. This is useful for monitoring external service status pages (doesn't match "down") or for ensuring that a vital piece of text doesn't go missing from a page a script might be looking for.
+</p>
+
+
 <%= render "form", site: @site, test: @test %>

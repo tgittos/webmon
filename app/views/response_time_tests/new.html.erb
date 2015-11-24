@@ -5,4 +5,8 @@
   <h3><%= link_to @site.name, @site %></h3>
 </header>
 
+<p class="info">
+A response time test will test how fast a HTTP server responds to the request. Generally the faster, the better, but sometimes you'll want to ensure that a server is doing some work, and so you might want to test it takes at least a certain amount of time to respond.
+</p>
+
 <%= render "form", site: @site, test: @test %>

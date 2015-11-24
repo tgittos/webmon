@@ -1,6 +1,6 @@
 <%= simple_form_for([site, test]) do |f| %>
   <%= f.input :comparison, collection: ContentTest.comparisons, label: "Comparison <em class=\"hint\">How should we evaluate this test?</em>".html_safe %>
-  <%= f.input :content, label: "Content <em class=\"hint\">What should we look for?</em>".html_safe %>
+  <%= f.input :content, label: "Content <em class=\"hint\">What text should we look for on the page?</em>".html_safe %>
   <%= f.input :failure_threshold, label: "Email failure threshold <em class=\"hint\">How many failures before we email you?</em>".html_safe, input_html: { value: '2' } %>
   <%= f.input :clear_threshold, label: "Email success threshold <em class=\"hint\">How many successes before we email you?</em>".html_safe, input_html: { value: '2' } %>
 

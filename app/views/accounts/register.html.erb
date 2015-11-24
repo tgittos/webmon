@@ -4,12 +4,20 @@
    var card = new SW.Card();
    var environment = card.services('environment');
    environment.request('environment').then(function(data){
-     $.post("accounts/create", data, function(response) {
-       if (response.status == "ok") {
-         window.location.replace("<%= sites_path %>");
-       } else {
-         $('h1').html('There was an error connecting your account');
-       }
+     $.ajax({
+       type: 'post',
+       headers: {
+         'X-CSRF-Token': '<%= form_authenticity_token.to_s %>'
+       },
+       data: data,
+       complete: function(response) {
+         if (response.responseJSON.status == "ok") {
+           window.location.replace("<%= sites_path %>");
+         } else {
+           $('h1').html('There was an error connecting your account');
+         }
+       },
+       url: "accounts/create"
      });
    });
  });

@@ -127,3 +127,12 @@ em.hint {
   color: #bbb;
   float: right;
 }
+
+p.info {
+  max-width: 500px;
+  padding-left: 55px;
+  background-image: image-url('info-xl.png');
+  background-size: 40px 40px;
+  background-repeat: no-repeat;
+  margin: 30px 0;
+}

@@ -5,4 +5,9 @@
   <h3><%= link_to @site.name, @site %></h3>
 </header>
 
+
+<p class="info">
+  A response test will test the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes" target="new">HTTP response code</a> that the site returns. This is helpful to determine if your server is erroring out (doesn't equal 500) or if a page is redirecting as it should (equals 301).
+</p>
+
 <%= render "form", site: @site, test: @test %>

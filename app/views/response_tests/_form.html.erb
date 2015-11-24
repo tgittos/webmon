@@ -1,6 +1,6 @@
 <%= simple_form_for([site, test]) do |f| %>
   <%= f.input :comparison, collection: ResponseTest.comparisons, label: "Comparison <em class=\"hint\">How should we evaluate this test?</em>".html_safe %>
-  <%= f.input :content, label: "Response code <em class=\"hint\">What HTTP response code are we looking for?</em>".html_safe %>
+  <%= f.input :content, label: "Response code <em class=\"hint\">What <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes\" target=\"new\">HTTP response code</a> are we looking for?</em>".html_safe %>
   <%= f.input :failure_threshold, label: "Email failure threshold <em class=\"hint\">How many failures before we email you?</em>".html_safe, input_html: { value: '2' } %>
   <%= f.input :clear_threshold, label: "Email success threshold <em class=\"hint\">How many successes before we email you?</em>".html_safe, input_html: { value: '2' } %>
   <%= f.button :submit, class: "btn-primary", id: "create-test" %>
