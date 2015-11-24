@@ -7,7 +7,8 @@ class Test < ActiveRecord::Base
   
   validates :comparison, presence: true
   validates :content, presence: true
-  validates :email_thresholds, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :failure_threshold, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :clear_threshold, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   
   after_create :check!
   
