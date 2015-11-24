@@ -1,5 +1,7 @@
 class AccountsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token, only: :register
+
   def register
     if session["user"] && !User.where(id: session["user"]["id"]).empty?
       redirect_to sites_path
