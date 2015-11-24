@@ -7,8 +7,7 @@ class Test < ActiveRecord::Base
   
   validates :comparison, presence: true
   validates :content, presence: true
-  validates :content, uniqueness: { scope: :comparison }
-  validate :email_thresholds 
+  validates :email_thresholds, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   
   after_create :check!
   
@@ -29,14 +28,5 @@ class Test < ActiveRecord::Base
   end
  
   private
-
-  def email_thresholds
-    if (failure_threshold || 0) <= 0
-      errors.add(:failure_threshold, 'cannot be less than 1')
-    end
-    if (clear_threshold || 0) <= 0
-      errors.add(:clear_threshold, 'cannot be less than 1')
-    end 
-  end
 
 end

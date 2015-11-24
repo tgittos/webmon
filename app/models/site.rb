@@ -6,7 +6,7 @@ class Site < ActiveRecord::Base
   belongs_to :user
 
   validates :name, presence: true
-  validates :url, presence: true
+  validates :url, presence: true, uniquness: { scope: :user_id }
 
   scope :active, ->{ where(active: true) }
 
