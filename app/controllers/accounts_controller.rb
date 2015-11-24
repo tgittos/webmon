@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 
-  skip_before_action :verify_authenticity_token, only: :register
+  skip_before_action :verify_authenticity_token
 
   def register
     if session["user"] && !User.where(id: session["user"]["id"]).empty?
