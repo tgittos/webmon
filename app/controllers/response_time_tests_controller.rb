@@ -44,7 +44,7 @@ class ResponseTimeTestsController < ApplicationController
   private
 
   def set_site
-    @site = Site.find(params[:site_id])
+    @site = @user.sites.find(params[:site_id])
   end
 
   def set_response_time_test

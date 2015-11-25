@@ -53,11 +53,10 @@ class SitesController < ApplicationController
   end
 
   def load_site
-    @site = Site.find(params[:id])
+    @site = @user.sites.find(params[:id])
   end
 
   def load_user
-    Rails.logger.info "session: #{session["user"]}"
     @user = User.find(session["user"]["id"])
   end
   

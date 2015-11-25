@@ -45,7 +45,7 @@ class ContentTestsController < ApplicationController
   private
 
   def set_site
-    @site = Site.find(params[:site_id])
+    @site = @user.sites.find(params[:site_id])
   end
 
   def set_content_test
@@ -55,5 +55,5 @@ class ContentTestsController < ApplicationController
   def content_test_params
     params.require(:content_test).permit(:comparison, :content, :failure_threshold, :clear_threshold)
   end
-
+  
 end

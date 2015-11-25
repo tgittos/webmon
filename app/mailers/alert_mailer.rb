@@ -7,7 +7,7 @@ class AlertMailer < ApplicationMailer
     @site = site
     @errors = errors
     mail to: @user.email,
-         subject: "Webmon: \"#{@site.name}\" has errors"
+         subject: "URL Up: \"#{@site.name}\" has errors"
   end
 
   def clear(user, site, incident)
@@ -15,7 +15,7 @@ class AlertMailer < ApplicationMailer
     @site = site
     @incident = incident
     mail to: @user.email,
-         subject: "Webmon: \"#{@site.name}\" OK"
+         subject: "URL Up: \"#{@site.name}\" OK"
   end
 
 end
