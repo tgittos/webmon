@@ -12,7 +12,13 @@ class ContentTest < Test
     else
       page_content !~ /#{content}/
     end == false
-    test_result.value = page_content
+    begin
+      page_content.encode!("UTF-8")
+      test_result.value = page_content
+    rescue Exception => e
+      # naughty, string is not actually UTF-8. Ignore the string!
+      Rails.logger.info "String can't convert to UTF-8, lets not worry about storing it."
+    end
     test_result.save!
     test_result
   end
