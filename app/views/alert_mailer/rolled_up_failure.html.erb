@@ -12,7 +12,12 @@
   <body>
     <h1>"<%= @site.name %>" has <%= @errors.count > 1 ? "errors" : "an error" %></h1>
     <% @errors.each do |error| %>
-      <% if error.test.is_a? ResponseTest %>
+      <% if error.reason == TestResult::TEST_ERRORED_REASON %>
+        <h3>Failed Due to a System Error</h3>
+        <p>
+        On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>>, <a href="<%= @site.url %>"><%= @site.url %></a> failed due to a system error: <%= error.value %>.
+        </p>
+      <% elsif error.test.is_a? ResponseTest %>
         <h3>Returned a Non-<%= error.test.content %> Response</h3>
         <p>
           On <%= error.created_at.strftime("%-m/%-d/%Y at %H:%M") %>, <a href="<%= @site.url %>"><%= @site.url %></a> returned a <%= error.value %> status.

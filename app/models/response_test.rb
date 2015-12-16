@@ -14,6 +14,7 @@ class ResponseTest < Test
     else
       response.code.to_i != content.to_i 
     end == false
+    test_status.reason = TestResult::TEST_FAILED_REASON unless test_status.result 
     test_status.value = response.code.to_i
     test_status.save!
     test_status

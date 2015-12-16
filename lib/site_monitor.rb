@@ -4,30 +4,41 @@ class SiteMonitor
     Rails.logger.info "[Site Monitor] Starting check..."
     Site.all.each do |site|
       errors = []
-      Rails.logger.info "[Site Monitor] Checking #{site.url}"
       site.tests.each do |test|
+        result = nil
         begin
           Timeout.timeout(30) do
-            Rails.logger.info "[Site Monitor] Running test #{test.to_s}"
+            Rails.logger.info "[Site Monitor] Running test #{test.to_s} for site #{site.url}"
             result = test.check!
-            if !result.result
-              # lets add to the errors if the error threshold has been hit
-              results = Array.wrap(test.test_results.newest_first.take(test.failure_threshold)).collect{|tr| tr.result}
-              if results.count == test.failure_threshold && test.incidents.active.count == 0 && !results.include?(true)
-                errors << result unless result.result
-              end
-            else
-              # lets clear the incident if the clear threshold has been hit
-              results = Array.wrap(test.test_results.newest_first.take(test.clear_threshold)).collect{|tr| tr.result}
-              if results.count == test.clear_threshold && test.incidents.active.count > 0 && !results.include?(false)
-                test.incidents.last.clear
-              end
-            end
+            raise "artificial error!"
           end
         rescue Timeout::Error
-          Rails.logger.info "[Site Monitor] Test \"#{test.to_s}\" timed out!"
+          Rails.logger.info "[Site Monitor] Test \"#{test.to_s}\" for site #{site.url} timed out!"
+          result.result = false
+          result.reason = TestResult::TEST_ERRORED_REASON
+          result.value = "Test timed out!"
+          result.save
         rescue Exception => e
-          Rails.logger.error "[Site Monitor] Error running test check: #{e.message}: #{e.backtrace.join("\n")}"
+          Rails.logger.error "[Site Monitor] Error running test \"#{test.to_s}\" for #{site.url}: #{e.message}: #{e.backtrace.join("\n")}"
+          result.result = false
+          result.reason = TestResult::TEST_ERRORED_REASON
+          result.value = e.message
+          result.save
+        ensure
+          puts "in the ensure, result: #{result.inspect}"
+          if !result.result
+            # lets add to the errors if the error threshold has been hit
+            results = Array.wrap(test.test_results.newest_first.take(test.failure_threshold)).collect{|tr| tr.result}
+            if results.count == test.failure_threshold && test.incidents.active.count == 0 && !results.include?(true)
+              errors << result unless result.result
+            end
+          else
+            # lets clear the incident if the clear threshold has been hit
+            results = Array.wrap(test.test_results.newest_first.take(test.clear_threshold)).collect{|tr| tr.result}
+            if results.count == test.clear_threshold && test.incidents.active.count > 0 && !results.include?(false)
+              test.incidents.last.clear
+            end
+          end
         end
       end
       if errors.count > 0
