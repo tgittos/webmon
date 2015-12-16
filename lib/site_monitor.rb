@@ -10,7 +10,6 @@ class SiteMonitor
           Timeout.timeout(30) do
             Rails.logger.info "[Site Monitor] Running test #{test.to_s} for site #{site.url}"
             result = test.check!
-            raise "artificial error!"
           end
         rescue Timeout::Error
           Rails.logger.info "[Site Monitor] Test \"#{test.to_s}\" for site #{site.url} timed out!"
