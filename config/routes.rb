@@ -54,9 +54,12 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
-  root 'accounts#register'
+  #root 'accounts#register'
+  root 'sites#index'
 
   post 'accounts/create' => 'accounts#create' 
+
+  get 'unsubscribe/:app_uid' => 'unsubscribe#unsubscribe'
 
   resources :sites do
     resources :content_tests do

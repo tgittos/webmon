@@ -10,6 +10,8 @@ class SiteMonitor
           Timeout.timeout(30) do
             Rails.logger.info "[Site Monitor] Running test #{test.to_s}"
             result = test.check!
+            result.result = false
+            result.save
             if !result.result
               # lets add to the errors if the error threshold has been hit
               results = Array.wrap(test.test_results.newest_first.take(test.failure_threshold)).collect{|tr| tr.result}

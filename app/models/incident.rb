@@ -14,11 +14,13 @@ class Incident < ActiveRecord::Base
   end
 
   def send_alert_email
+    return if !tests.first.site.user.send_emails
     errors = incident_tests.collect{|it| it.test.test_results.latest }
     AlertMailer.rolled_up_failure(site.user, site, errors).deliver_now
   end
 
   def send_clear_email
+    return if !tests.first.site.user.send_emails
     AlertMailer.clear(site.user, site, self).deliver_now
   end
 
