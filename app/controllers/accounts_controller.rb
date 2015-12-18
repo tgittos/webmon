@@ -1,5 +1,7 @@
 class AccountsController < ApplicationController
 
+  protect_from_forgery :except => [:create]
+
   def register
     if session["user"] && !User.where(id: session["user"]["id"]).empty?
       redirect_to sites_path
