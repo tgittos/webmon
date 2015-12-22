@@ -24,7 +24,6 @@ class SiteMonitor
           result.value = e.message
           result.save
         ensure
-          puts "in the ensure, result: #{result.inspect}"
           if !result.result
             # lets add to the errors if the error threshold has been hit
             results = Array.wrap(test.test_results.newest_first.take(test.failure_threshold)).collect{|tr| tr.result}
