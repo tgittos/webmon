@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def ensure_logged_in
     session["user"] = User.first
     redirect_to root_path unless session[:user]
-    @user = User.find(session["user"]["id"])
+    @user = User.find(session[:user]["id"])
   end
 
 end
