@@ -13,7 +13,8 @@ class AccountsController < ApplicationController
   def create
     app_uid = params[:app_host][:auid]
     user_email = params[:user][:email]
-    session[:user] = User.find_or_create_by(email: user_email, app_uid: app_uid) 
+    user = User.find_by(email: user_email, app_uid: app_uid) || User.create(email: user_email, app_uid: app_uid)
+    session[:user] = user
     if !session[:user].nil?
       render json: { status: "ok" }
     else

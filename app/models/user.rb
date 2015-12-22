@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: { scope: :app_uid }
 
-  has_many :sites
+  has_many :sites, dependent: :destroy
 end
