@@ -54,8 +54,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
-  #root 'accounts#register'
-  root 'sites#index'
+  root 'accounts#register'
 
   post 'accounts/create' => 'accounts#create' 
 
