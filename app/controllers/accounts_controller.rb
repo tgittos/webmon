@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
   protect_from_forgery :except => [:create]
 
   def register
-    if session["user"] && !User.where(id: session["user"]["id"]).empty?
+    if session[:user] && !User.where(id: session[:user]["id"]).empty?
       redirect_to sites_path
     else
       render(:layout => "layouts/blank")
@@ -13,8 +13,8 @@ class AccountsController < ApplicationController
   def create
     app_uid = params[:app_host][:auid]
     user_email = params[:user][:email]
-    session["user"] = User.find_or_create_by(email: user_email, app_uid: app_uid) 
-    if !session["user"].nil?
+    session[:user] = User.find_or_create_by(email: user_email, app_uid: app_uid) 
+    if !session[:user].nil?
       render json: { status: "ok" }
     else
       render json: { status: "error" }
