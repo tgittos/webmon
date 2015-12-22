@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def ensure_logged_in
+    session["user"] = User.first
     redirect_to root_path unless session[:user]
-    @user = User.find(session["user"]["id"])
+    @user = User.find(session[:user]["id"])
   end
 
 end
