@@ -5,7 +5,7 @@ class SiteMonitor
     Site.all.each do |site|
       errors = []
       site.tests.each do |test|
-        result = nil
+        result = test.test_results.new
         begin
           Timeout.timeout(30) do
             Rails.logger.info "[Site Monitor] Running test #{test.to_s} for site #{site.url}"
