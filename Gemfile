@@ -76,3 +76,5 @@ gem 'mailgun_rails'
 # Onboarding
 gem 'hopscotch-rails'
 gem 'js_cookie_rails'
+
+gem 'puma'
