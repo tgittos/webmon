@@ -58,6 +58,8 @@ Rails.application.routes.draw do
 
   post 'accounts/create' => 'accounts#create' 
 
+  get 'cookies' => 'accounts#cookies'
+
   get 'unsubscribe/:app_uid' => 'unsubscribe#unsubscribe'
 
   resources :sites do

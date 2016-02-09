@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 
-  protect_from_forgery :except => [:create]
+  protect_from_forgery :except => [:cookies]
 
   def register
     if session[:user] && !User.where(id: session[:user]["id"]).empty?
@@ -22,6 +22,10 @@ class AccountsController < ApplicationController
     else
       render json: { status: "error" }
     end
+  end
+
+  def cookies
+    render(:template => "accounts/cookies", :layout => "layouts/blank", status: 500)
   end
 
 end
