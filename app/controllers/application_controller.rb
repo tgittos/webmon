@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from "ActionController::InvalidAuthenticityToken" do |exception|
-    redirect_to cookies_path
+    render json: { redirect: "cookies" }
   end
   
   def ensure_logged_in
