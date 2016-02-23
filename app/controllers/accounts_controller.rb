@@ -1,12 +1,10 @@
 class AccountsController < ApplicationController
 
-  protect_from_forgery :except => [:create]
-
   def register
     if session[:user] && !User.where(id: session[:user]["id"]).empty?
       redirect_to sites_path
     else
-      render(:layout => "layouts/blank")
+      render(:template => "accounts/register", :layout => "layouts/blank")
     end
   end
 
@@ -22,6 +20,10 @@ class AccountsController < ApplicationController
     else
       render json: { status: "error" }
     end
+  end
+
+  def enable_cookies
+    render(:template => "accounts/cookies", :layout => "layouts/blank", status: 500)
   end
 
 end
