@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-# Use Rails 2.2.0
-ruby "2.2.2"
+# Use JRuby 9.0.5.0
+ruby '2.2.3', :engine => 'jruby', :engine_version => '9.0.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # still need to use special Windows build of nokogiri
-# gem 'nokogiri', '1.6.7.rc3'
 gem 'nokogiri'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -36,15 +35,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
   gem 'rspec-rails', '~> 3.2.1'
   gem 'pry'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #gem 'web-console', '~> 2.0'
 end
 
 group :test do
@@ -59,7 +56,7 @@ group :production do
 end
 
 # Use Postgres as database
-gem 'pg'
+gem 'activerecord-jdbcpostgresql-adapter'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
