@@ -26,7 +26,7 @@ def spawn_enqueuer
       end
       # sleep for 15 minutes, replicating current functionality but
       # with a rabbitmq queue
-      sleep 15 * 60 * 60
+      sleep 15 * 60
     end
   end
 end
