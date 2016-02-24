@@ -1,25 +1,21 @@
-#require './lib/test'
-
 def in_server?
   !defined?(Rails::Console) && !(File.basename($0) == "rake")
 end
-
-@threads = []
 
 if in_server? && !ENV['WEBMON_NO_CHECK']
   num_threads = 4
   Rails.logger.info "Starting #{num_threads} SiteMonitor thread/s"
   # create 4 threads
-  @threads = num_threads.times.collect do
+  num_threads.times.collect do
     Thread.new do
       while true
-      puts "[#{Thread.current.object_id}] working a queue"
-      #SiteMonitor.new.work_queue
-      sleep 10
+        ActiveRecord::Base.connection_pool.with_connection do
+          SiteMonitor.new.work_queue
+        end
+        sleep 5
       end
     end
   end
-  Rails.logger.info "Threads: #{@threads.inspect}"
 else
   Rails.logger.info "Detected not in server or WEBMON_NO_CHECK set, not starting monitor schedules"
 end

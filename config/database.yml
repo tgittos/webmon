@@ -7,8 +7,8 @@
 default: &default
   user: postgres
   adapter: postgresql
-  pool: 5
-  timeout: 5000
+  pool: 10
+  timeout: 1000
 
 development:
   <<: *default

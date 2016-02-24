@@ -1,18 +1,16 @@
 class SiteMonitor
 
-  #def logger
-  #  @logger ||= Logger.new(STDOUT)
-  #end
+  def logger
+    @logger ||= Logger.new(STDOUT)
+  end
 
-  #def thread_id
-  #  @thread_id ||= Thread.current.inspect
-  #end
+  def thread_id
+    @thread_id ||= Thread.current.object_id
+  end
 
   def work_queue
-      #s = Site.first
-      puts "[#{Thread.current.inspect}] working my queue"
-      #  logger.info "[#{thread_id}] working my queue - #{s.inspect}"
-      #end
+        s = Site.first
+        logger.info "[#{thread_id}] working my queue - #{s.inspect}"
   end
 
   def self.update!
