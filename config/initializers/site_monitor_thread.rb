@@ -8,12 +8,12 @@ def spawn_queue_workers
   # create 4 threads
   num_threads.times.collect do
     Thread.new do
-      while true
+      #while true
         ActiveRecord::Base.connection_pool.with_connection do
           HealthQueueWorker::work
-          sleep 5 # remove this when we go live
         end
-      end
+      #  sleep 5 # remove this when we go live
+      #end
     end
   end 
 end
@@ -29,6 +29,14 @@ def spawn_enqueuer
       sleep 15 * 60 * 60
     end
   end
+end
+
+# this should probably be in a different initializer
+def init_rabbitmq_channel
+  connection = Bunny.new(host: 'localhost')
+  connection.start
+  channel = connection.create_channel
+  connection.stop
 end
 
 if in_server? && !ENV['WEBMON_NO_CHECK']

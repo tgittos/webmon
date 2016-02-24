@@ -67,7 +67,7 @@ gem 'font-awesome-rails', '~> 4.3'
 gem 'simple_form', '~> 3.1.0'
 
 # Scheduling
-gem 'rufus-scheduler', '~> 3.1.5'
+#gem 'rufus-scheduler', '~> 3.1.5'
 
 # Email alerts
 #gem 'mailgun-ruby', '~> 1.0.2', require: 'mailgun'
@@ -77,4 +77,9 @@ gem 'mailgun_rails'
 gem 'hopscotch-rails'
 gem 'js_cookie_rails'
 
+# JRuby server
 gem 'puma'
+
+# RabbitMQ for messaging
+gem 'march_hare'
+

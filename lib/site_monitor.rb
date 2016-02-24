@@ -1,8 +1,9 @@
 class SiteMonitor
 
-  def self.update!
+  def self.check_site(site_id)
     Rails.logger.info "[Site Monitor] Starting check..."
-    Site.all.each do |site|
+    site = Site.find(site_id)
+
       errors = []
       site.tests.each do |test|
         result = test.test_results.new
@@ -47,7 +48,7 @@ class SiteMonitor
           Rails.logger.info "WEBMON_NO_EMAIL set, not sending email alerts"
         end
       end
-    end
+
     Rails.logger.info "[Site Monitor] Done!"
   end
 

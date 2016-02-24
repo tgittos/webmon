@@ -104,6 +104,7 @@ GEM
       actionmailer (>= 3.2.13)
       json (>= 1.7.7)
       rest-client (>= 1.6.7)
+    march_hare (2.16.0-java)
     method_source (0.8.2)
     mime-types (2.99.1)
     minitest (5.8.4)
@@ -172,7 +173,6 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    rufus-scheduler (3.1.10)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -229,13 +229,13 @@ DEPENDENCIES
   jquery-rails
   js_cookie_rails
   mailgun_rails
+  march_hare
   nokogiri
   pry
   puma
   rails (= 4.2.4)
   rails_12factor
   rspec-rails (~> 3.2.1)
-  rufus-scheduler (~> 3.1.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form (~> 3.1.0)
