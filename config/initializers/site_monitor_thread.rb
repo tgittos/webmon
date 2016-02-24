@@ -31,14 +31,6 @@ def spawn_enqueuer
   end
 end
 
-# this should probably be in a different initializer
-def init_rabbitmq_channel
-  connection = Bunny.new(host: 'localhost')
-  connection.start
-  channel = connection.create_channel
-  connection.stop
-end
-
 if in_server? && !ENV['WEBMON_NO_CHECK']
   spawn_queue_workers
   spawn_enqueuer
