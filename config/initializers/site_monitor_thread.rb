@@ -8,12 +8,9 @@ def spawn_queue_workers
   # create 4 threads
   num_threads.times.collect do
     Thread.new do
-      #while true
-        ActiveRecord::Base.connection_pool.with_connection do
-          HealthQueueWorker::work
-        end
-      #  sleep 5 # remove this when we go live
-      #end
+      ActiveRecord::Base.connection_pool.with_connection do
+        HealthQueueWorker::work
+      end
     end
   end 
 end
