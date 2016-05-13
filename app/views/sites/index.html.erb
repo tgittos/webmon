@@ -7,6 +7,10 @@
   </ul>
 </header>
 
+<div class="banner">
+  Trying to track a URL your users depend on? Try the <a href="http://www.spiceworks.com/it-troubleshooting/">Spiceworks Connectivity Dashboard</a>.
+</div>
+
 <div class="sites">
   <% @sites.each do |site| %>
     <h2 class="<%= site_css_class(site) %>"><%= link_to site.name, site %></h2>
